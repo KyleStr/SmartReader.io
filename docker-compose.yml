@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  db:
+    image: "mongo:4.0.27"
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${DB_USER}"
+      MONGO_INITDB_ROOT_PASSWORD: "${DB_PWD}"
+    volumes:
+      - mongo-volume:/data/db
+  web:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "80:8080"
+    environment:
+      DB_USER:  "$DB_USER"
+      DB_PWD: "$DB_PWD"
+      DB_PORT: "$DB_PORT"
+      DB_HOST: db
+      MONGO_AUTH_SRC: "admin"
+      MONGO_AUTH_MECH: "SCRAM-SHA-1"
+      ID_GOOGLE_ANALYTICS: "$ID_GOOGLE_ANALYTICS"
+      AWS_ACCESS_KEY_ID: "$AWS_ACCESS_KEY_ID"
+      AWS_SECRET_ACCESS_KEY: "$AWS_SECRET_ACCESS_KEY"
+      DOWNLOAD_MODELS: "$DOWNLOAD_MODELS"
+      CORE_API_KEY: "$CORE_API_KEY"
+      MIN_FILES: "$MIN_FILES"
+      LOG_LEVEL: "$LOG_LEVEL"
+    volumes:
+      - execution-volume:/code/execution_data
+      - models-volume:/code/data
+    depends_on:
+      - db
+volumes:
+  mongo-volume:
+  execution-volume:
+  models-volume:

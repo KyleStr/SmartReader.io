@@ -1,0 +1,230 @@
+{% extends "base_template.html" %}
+{% block title %}{{language.generate_summary_title}}{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+    .dropbtn {
+        background-color: #939393;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #696969;
+    }
+
+    #container1 {
+        display: none;
+    }
+
+    .file {
+        visibility: hidden;
+        position: absolute;
+    }
+
+    [hidden] {
+        display: none !important;
+    }
+
+    .background-drop{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.85);
+        color: white;
+        z-index: 1200;
+    }
+
+    .background-drop .progress {
+        width: 300px;
+        margin: auto;
+        height: 12px;
+        margin-bottom: 20px;
+    }
+
+    .text-vcontain {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        display: table;
+    }
+
+    .text-vcontain>.text-vcenter {
+        width: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#background-drop').hide();
+    });
+    
+    $(function () {
+        $.ajax({
+            url: "/get_models",
+            type: "GET",
+            success: function (status_json) {
+                var dropdown = document.getElementById("model");
+                for (var key in status_json) {
+                    var option = document.createElement("option");
+                    option.value = status_json[key][0] + ",  " + status_json[key][1];
+                    option.innerHTML = status_json[key][0] + ",   " + status_json[key][2];
+                    dropdown.appendChild(option);
+                }
+            },
+            dataType: "json"
+        })
+    })
+
+    $(document).on('click', '#submit', function () {
+        console.log("getting in click function");
+        var form = $('#summary_data')[0];
+        console.log(form);
+        var fd = new FormData(form);
+        console.log(fd);
+        console.log("getting in click function");
+        
+        var idb_core = $("input[name='idb_core']:checked").val();
+        if(idb_core == undefined){
+            alert("{{language.generate_summary_alert_corpus}}");
+            return true;
+        }
+
+        $('#background-drop').show();
+
+        $.ajax({
+            url: '/create_summary',
+            data: fd,
+            type: 'POST',
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: true,
+            success: function (response) {
+                console.log(response);
+                console.log("getting response");
+                window.location = '/{{language.key}}/app/SummariesStatus';
+                $('#background-drop').hide();
+            },
+            error: function (error) {
+          
+                if(error.responseText){
+                    
+                    try {
+                       var response = JSON.parse(error.responseText);
+                       if(response.code == 'EMPTY_RESULTS') {
+                            alert("{{language.alert_empty_results}}");
+                       }
+                       else{
+                            alert("{{language.alert_unknown_error}}");   
+                       }
+
+                    } catch (error) {
+                        alert("{{language.alert_unknown_error}}");
+                    }
+                }
+                else{
+                    alert("{{language.alert_unknown_error}}");
+                }
+                console.error(error);                
+                $('#background-drop').hide();
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="wrapper">
+
+    {% include "navbar.html" %}
+    {% include "sidebar.html" %}
+
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div id="overview">
+                <form method="post" enctype="multipart/form-data" id="summary_data">
+                    <div class="form-group">
+                        <label>{{language.label_select_model}}</label>
+                        <div class="dropdown">
+                            <select class="btn btn-primary dropdown-toggle" name="model" id="model">
+                                <span class="caret"></span>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{language.generate_summary_label_corpus}}</label>
+                        <br/>
+                        <label class="radio-inline">
+                            <input type="radio" name="idb_core" value="idb" /> {{language.generate_summary_corpus_idb}}
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="idb_core" value="core" /> {{language.generate_summary_corpus_external}}
+                        </label>
+                    </div>
+
+                    <br />
+                    <input type="button" value="{{language.submit}}" class="btn btn-primary" id="submit">
+                </form>
+                <p id="result">{{ result }} </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="background-drop" id="background-drop">
+    <div class="text-vcontain">
+        <div class="text-vcenter">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+            <p>
+                {{language.generate_summary_text_1}}
+            </p>
+            <p>
+                {{language.generate_summary_text_2}}
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends "navbar.html" %}
+{% block navbarBrandRight %}
+    {{ super() }}
+    <a class="btn btn-primary btn-register" href="https://docs.google.com/forms/d/e/1FAIpQLScictNgjOwip7vmBCf3wFKkVafvb0-pxIqtVwUZ1slsGWLN1w/viewform?hl={{language.key}}" target="_blank">{{language.register}}</a>
+    <a class="btn btn-primary btn-register" href="/{{language.key}}/app">{{language.login}}</a>
+{% endblock %}

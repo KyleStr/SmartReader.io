@@ -1,0 +1,56 @@
+{% extends "base_template.html" %}
+{% block title %}Summaries{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .dropbtn {
+        background-color: #939393;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .summary_filename {
+        display: none;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+    <div id="wrapper">
+        {% include "navbar.html"%}
+        {% include "sidebar.html"%}
+
+        <div class="main">
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <div id="overview">
+                    {{result}} <b id="summary_filename">{{summary_filename}}</b><br /><br />
+                    <form method="post" action="/upload">
+                        <input name="summary_filename" class="summary_filename" value="{{summary_filename}}"></input>
+                        <input type="submit" class="dropbtn btn btn-primary" id="generate"
+                            value="Go back to Summary Generation">
+                    </form>
+                    <br /><br />
+
+                    <form method="post" action="/download">
+                        <input name="summary_filename" class="summary_filename" value="{{summary_filename}}"></input>
+                        <input type="submit" class="dropbtn btn btn-primary" id="download"
+                            value="Download summaries json">
+
+                    </form>
+                    <br /><br />
+
+                    <form method="post" action="/summaries_visualization">
+                        <input name="summary_filename" class="_id" value="{{summary_filename}}"></input>
+                        <input name="lda_filename" class="lda_filename" value="{{lda_filename}}"></input>
+                        <input type="submit" class="dropbtn btn btn-primary" id="visualize" value="Visualize summaries">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

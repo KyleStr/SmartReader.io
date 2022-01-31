@@ -1,0 +1,54 @@
+{% extends "base_template.html" %}
+{% block title %}SmartReader{% endblock %}
+
+{% block content %}
+<div id="wrapper">
+    {% include "navbar.html" %}
+    {% include "sidebar.html" %}
+    <div class="main">
+        <div class="main-content">
+            <div id="overview">
+                <p>{{language.index_title}}</p>
+                <ol>
+                    <li dir="ltr">
+                        <h3 dir="ltr">{{language.li_title_model_definition}}</h3>
+                        <p dir="ltr">{{language.li_text_model_definition}}</p>
+                    </li>
+                    <li dir="ltr">
+                        <h3 dir="ltr">{{language.li_title_models_status}}</h3>
+                        <p dir="ltr">{{language.li_text_models_status}}</p>
+                    </li>
+                    <li dir="ltr">
+                        <h3 dir="ltr">{{language.li_title_model_application}}</h3>
+                        <p dir="ltr">{{language.li_text_model_application}}</p>
+                    </li>
+                    <li dir="ltr">
+                        <h3 dir="ltr">{{language.li_title_summaries_status}}</h3>
+                        <p dir="ltr">{{language.li_text_summaries_status}}</p>
+                        <h3 dir="ltr">{{language.li_title_interpreting_results}}</h3>
+                        {% autoescape false %}
+                            <ul>
+                                <li dir="ltr">
+                                    <p dir="ltr">{{language.li_title_interpreting_results_1}}</p>
+                                </li>
+                                <li dir="ltr">
+                                    <p dir="ltr">{{language.li_title_interpreting_results_2}}</p>
+                                </li>
+                                <li dir="ltr">
+                                    <p dir="ltr">{{language.li_title_interpreting_results_3}}</p>
+                                </li>
+                                <li dir="ltr">
+                                    <p dir="ltr">{{language.li_title_interpreting_results_4}}</p>
+                                </li>
+                                <li dir="ltr">
+                                    <p dir="ltr">{{language.li_title_interpreting_results_5}}</p>
+                                </li>
+                            </ul>
+                        {% endautoescape %}
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

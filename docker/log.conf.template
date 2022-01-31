@@ -1,0 +1,29 @@
+[loggers]
+keys=root
+
+[handlers]
+keys=fileHandler,streamHandler
+
+[formatters]
+keys=Formatter
+
+[logger_root]
+level=$LOG_LEVEL
+handlers=fileHandler,streamHandler
+qualname=main
+
+[handler_fileHandler]
+class=FileHandler
+level=$LOG_LEVEL
+formatter=Formatter
+args=('smart_reader_app.log', 'a', 'utf8')
+
+[handler_streamHandler]
+class=StreamHandler
+level=$LOG_LEVEL
+args=(sys.stdout,)
+formatter=Formatter
+
+[formatter_Formatter]
+format= %(asctime)s - %(levelname)s - %(name)s [%(filename)s:%(lineno)d] [%(process)d:%(thread)d] - %(message)s
+datefmt="%Y-%m-%d %H:%M:%S"

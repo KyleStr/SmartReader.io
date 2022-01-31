@@ -1,0 +1,23 @@
+<!-- LEFT SIDEBAR -->
+<div id="sidebar-nav" class="sidebar">
+    <div class="sidebar-scroll">
+        <nav id="sidebar-list">
+            <ul class="nav">
+                <li><a href="/{{language.key}}/app"> <span>{{language.menu_how_to}}</span></a></li>
+                <li><a href="/{{language.key}}/app/GenerateDataCollection"> <span>{{language.menu_model_definition}}</span></a></li>
+                <li><a href="/{{language.key}}/app/ModelsStatus"> <span>{{language.menu_models_status}}</span></a></li>
+                <li><a href="/{{language.key}}/app/GenerateSummary"> <span>{{language.menu_model_application}}</span></a></li>
+                <li><a href="/{{language.key}}/app/SummariesStatus"> <span>{{language.menu_results}}</span></a></li>
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdsaomBMbamym4hzSuAut12P1tncxTHh7tr0RKLBjTLsddLaQ/viewform?hl={{language.key}}" target="_blank"> <span>{{language.menu_feedback_form}}</span></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = window.location;
+        $('nav a').filter(function () {
+            return this.href == url;
+        }).parent().addClass('active');
+    });
+</script>

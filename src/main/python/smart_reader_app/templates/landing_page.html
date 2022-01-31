@@ -1,0 +1,122 @@
+{% extends "base_template.html" %}
+{% block title %}{{language.visualize_summary}}{% endblock %}
+{% block head %}
+{{ super() }}
+    <link rel="stylesheet" href="/static/assets/css/landing_page.css">
+{% endblock %}
+{% block content %}
+<div id="wrapper">
+    <!-- NAVBAR -->
+    {% include "navbar_login.html" %}
+    <!-- END NAVBAR -->
+
+    <header class="text-white header-landing">
+        <div class="container-page text-center">
+            <div class="text-vcontain">
+                <div class="text-vcenter">
+                    <h1 class="fw-bolder">{{language.landing_page_header_title}}</h1>
+                    <div class="row">                        
+                        <div class="col-md-offset-4 col-md-4 text-center">
+                            <img class="img-responsive" src="/static/assets/img/logo-core.png" />
+                        </div>
+                    </div>
+                    <p>{{language.landing_page_header_text_1}}</p>
+                    <p>{{language.landing_page_header_text_2}}</p>
+                    <a class="btn btn-lg btn-primary" href="#section">{{language.landing_page_header_button}}</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="section">
+        <div class="text-vcontain">
+            <div class="text-vcenter">
+                <div class="container-page">
+                    <div class="row" style="overflow: auto;">
+                        <div class="col-sm-12">
+                            <div class="popover top popover-top popover-first">
+                                <div class="arrow"></div>
+                                <div class="popover-content">
+                                    <p>{{language.landing_page_section_text_1}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <div id="lda_content">
+                                {% include "/includes/" + lda_html %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="overflow: auto;">
+                        <div class="col-sm-12">
+                            <div class="popover top popover-top">
+                                <div class="arrow"></div>
+                                <div class="popover-content">
+                                    <p>{{language.landing_page_section_text_2}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <img class="img-responsive" src="/static/assets/img/topics_{{language.key}}.png" />
+                        </div>
+                    </div>
+
+                    <div class="row" style="overflow: auto;">
+                        <div class="col-sm-12">
+                            <div class="popover top popover-top">
+                                <div class="arrow"></div>
+                                <div class="popover-content">
+                                    <p>{{language.landing_page_section_text_3}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <img class="img-responsive" src="/static/assets/img/keywords_{{language.key}}.png" />
+                        </div>
+                    </div>
+
+                    <div class="row" style="overflow: auto;">
+                        <div class="col-sm-12">
+                            <div class="popover top popover-top">
+                                <div class="arrow"></div>
+                                <div class="popover-content">
+                                    <p>{{language.landing_page_section_text_4}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <img class="img-responsive" src="/static/assets/img/summary_{{language.key}}.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section2">
+        <div class="text-vcontain text-center">
+            <div class="text-vcenter">
+                <div class="container-page">
+                    <div class="row gx-4 justify-content-center">
+                        <div class="col-lg-12">
+                            <h2>{{language.landing_page_section_2_text}}</h2>
+                            <div class="row">
+                                <div class="col-12">
+                                    <a class="btn btn-primary btn-register" href="https://docs.google.com/forms/d/e/1FAIpQLScictNgjOwip7vmBCf3wFKkVafvb0-pxIqtVwUZ1slsGWLN1w/viewform?hl={{language.key}}" target="_blank">{{language.landing_page_section_2_button}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container-page">
+            <p class="text-center">Copyright © SmartReader {{ now.year }}</p>
+        </div>
+    </footer>
+</div>
+{% endblock %}

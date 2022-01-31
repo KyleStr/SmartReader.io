@@ -1,0 +1,31 @@
+<!-- NAVBAR -->
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="brand">
+		<a href="/{{language.key}}/">
+			<h2>SmartReader</h2>
+		</a>
+	</div>
+	<div class="brandLang">
+		{% block navbarBrandRight %}{% endblock %}
+
+		{% if language.key == "es" %}
+			<a href="/es" class="active">
+				<span>ES</span>
+			</a>
+			| 
+			<a href="/en">
+				<span>EN</span>
+			</a>
+		{% else %}
+			<a href="/es">
+				<span>ES</span>
+			</a>
+			| 
+			<a href="/en" class="active">
+				<span>EN</span>
+			</a>
+		{% endif %}
+		
+	</div>
+</nav>
+<!-- END NAVBAR -->

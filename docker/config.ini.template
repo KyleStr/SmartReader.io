@@ -1,0 +1,28 @@
+[ENVIRONMENT]
+host = $DB_HOST
+port = $DB_PORT
+authsrc = $MONGO_AUTH_SRC
+authmech = $MONGO_AUTH_MECH
+[CREDENTIALS]
+usr = $DB_USER
+psswd = $DB_PWD
+[APP]
+min_files = $MIN_FILES
+num_topics = 5
+num_sentences = 10
+show_topics = 5
+n_keywords_ranking = 100
+alpha_keywords = 0.8
+max_sentences = 100
+[INPUT]
+data_path = data/temporal
+[OUTPUT]
+base_dir = execution_data/
+models_path = models/
+summary_path = summary/
+data_path = data/
+html_path = html/
+[GOOGLE]
+id_google_analytics = $ID_GOOGLE_ANALYTICS
+[CORE]
+core_api_key = $CORE_API_KEY
