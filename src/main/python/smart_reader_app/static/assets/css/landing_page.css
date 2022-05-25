@@ -33,6 +33,14 @@ html {
     margin: auto;
 }
 
+.about-link {
+    margin-top: 15px;
+}
+
+.about-link a {
+    color: #ffffff;
+}
+
 .popover {
     display: block;
     z-index: 2;

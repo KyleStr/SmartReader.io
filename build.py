@@ -27,7 +27,7 @@ description = "SmartReader es una herramienta que utiliza técnicas de Procesami
 url = "https://dev-git.labs.gmv.com/idb-smartreader/smart-reader-app.git"
 authors = [Author("GMV", "bda@gmv.com")]
 
-version = '0.4.0'
+version = '0.5.0'
 default_task = ["clean", "install_dependencies", "analyze", "publish", "publish_distribution"]
 
 mvn_group_id = "com.gmv.smart-reader-app"

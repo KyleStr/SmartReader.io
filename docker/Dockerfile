@@ -21,7 +21,9 @@ ENV PYTHONPATH="${PYTHONPATH}:/usr/local/lib/python3.9/site-packages:${SERVICE_H
 ENV FLASK_ENV production
 
 # Copy project
-COPY . ${SERVICE_HOME}
+COPY config ${SERVICE_HOME}/config
+COPY src ${SERVICE_HOME}/src
+COPY docker ${SERVICE_HOME}/docker
 
 WORKDIR ${SERVICE_HOME}
 
